@@ -1,6 +1,12 @@
-var express = require("express"),
-	app = express();
+var express = require("express");
+var body = require("body-parser");
 var path = require("path");
+
+var app = express();
+app.use(body.urlencoded({extended: true}));
+
+
+
 
 var viewsDir = path.join(process.cwd(), "views");
 
@@ -33,8 +39,12 @@ app.get("/contact", function(req,res){
 });
 
 app.post("/burgers", function(req,res){
-	res.send("BURGER POST REceived");
-})
+	var burgerName = req.body.burger.name;
+	burgers.push(burgerName+ "burger");
+	//res.send("See all burgers at localhost:3000/burgers");
+	res.redirect("/burgers");
+	//console.log(burgerName);
+});
 
 app.listen(3000,function(){
 	console.log("Express Up and running!!");
