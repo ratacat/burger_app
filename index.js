@@ -15,9 +15,10 @@ var burgers = [
 
 //root route
 app.get("/", function (req,res) {
-	var text = "View all burgers at "+ 
-			   "<a href='/burgers'>/burgers</a>"; 
-	res.send(text);
+	var homePath = path.join(viewsDir, "home.html");
+	res.sendFile(homePath);
+	console.log(req.params);
+	console.log(req.query);
 });
 
 app.get("/burgers", function(req,res){
@@ -30,6 +31,10 @@ app.get("/contact", function(req,res){
 	res.sendFile(contactPath);
 	//console.log(res);
 });
+
+app.post("/burgers", function(req,res){
+	res.send("BURGER POST REceived");
+})
 
 app.listen(3000,function(){
 	console.log("Express Up and running!!");
